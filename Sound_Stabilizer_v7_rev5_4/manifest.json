@@ -1,0 +1,23 @@
+{
+  "manifest_version": 3,
+  "name": "Sound Stabilizer for Twitch/YouTube (v7 Full)",
+  "version": "1.0",
+  "description": "Automatically stabilizes audio volume on Twitch and YouTube using Web Audio API.",
+  "permissions": ["activeTab", "scripting", "storage"],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "action": {
+    "default_popup": "popup.html",
+    "default_icon": "icon.png"
+  },
+  "icons": {
+    "16": "icon.png"
+  },
+  "web_accessible_resources": [
+    {
+      "resources": ["injected_script.js"],
+      "matches": ["<all_urls>"]
+    }
+  ]
+}
