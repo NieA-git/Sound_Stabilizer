@@ -1,0 +1,94 @@
+<!-- popup.html v12 (Рабочий вариант с метками графика) -->
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h3>Стабилизатор звука</h3>
+    </header>
+
+    <div class="slider-group">
+      <label for="thresholdSlider">
+        Порог (Threshold): 
+        <!-- Подсказка перемещена внутрь label -->
+        <span class="tooltip-container inline-tip">
+            <span class="tooltip-trigger">?</span>
+            <span class="tooltip-text">Звуки громче этого уровня будут автоматически приглушены. Установите ниже для более агрессивной стабилизации.</span>
+        </span>
+        <span id="thresholdValue" class="slider-value">- dB</span>
+      </label>
+      <input type="range" id="thresholdSlider" min="-60" max="0" step="1">
+    </div>
+
+    <div class="slider-group">
+      <label for="ratioSlider">
+        Степень (Ratio): 
+        <!-- Подсказка перемещена внутрь label -->
+         <span class="tooltip-container inline-tip">
+            <span class="tooltip-trigger">?</span>
+            <span class="tooltip-text">Насколько сильно будет работать компрессор. Например, 4:1 означает, что каждые 4 дБ выше порога превратятся в 1 дБ после обработки.</span>
+        </span>
+        <span id="ratioValue" class="slider-value">: 1</span>
+      </label>
+      <input type="range" id="ratioSlider" min="1" max="20" step="1"> 
+    </div>
+
+    <div class="slider-group">
+      <label for="gainSlider">
+        Усиление (Gain): 
+        <!-- Подсказка перемещена внутрь label -->
+         <span class="tooltip-container inline-tip">
+            <span class="tooltip-trigger">?</span>
+            <span class="tooltip-text">Общая громкость после применения компрессора (Make-up Gain). Используется, чтобы компенсировать "проседание" громкости после стабилизации.</span>
+        </span>
+        <span id="gainValue" class="slider-value">x</span>
+      </label>
+      <input type="range" id="gainSlider" min="0" max="4" step="0.1">
+    </div>
+    
+    <div class="volume-group">
+        <label>Уровень громкости: <span id="volumeDbValue" class="slider-value">-- dB</span></label>
+        <div id="volumeBarContainer">
+            <div id="volumeBar"></div>
+        </div>
+    </div>
+    
+    <!-- БЛОК ОТЛАДКИ С МЕТКАМИ -->
+    <div class="debug-group">
+        <label>
+            <input type="checkbox" id="debugModeCheckbox">
+            Режим отладки (График)
+             <span class="tooltip-container inline-tip">
+                <span class="tooltip-trigger">?</span>
+                <span class="tooltip-text">Красный график: звук до обработки. Зеленый график: звук после обработки.</span>
+            </span>
+        </label>
+        
+        <div class="chart-container-wrapper"> 
+            <!-- Эти блоки содержат статические метки -->
+            <div class="chart-labels">
+                <span class="label-top">-0 dB</span>
+                <span class="label-bottom">-60 dB</span>
+            </div>
+            <canvas id="debugChart" width="260" height="80"></canvas> 
+            <div class="chart-labels-right">
+                 <span class="label-top-right">-0 dB</span>
+                 <span class="label-bottom-right">-60 dB</span>
+            </div>
+        </div>
+    </div>
+    <!-- КОНЕЦ БЛОКА ОТЛАДКИ -->
+
+    <button id="toggleButton">Включить</button>
+    
+    <button id="resetButton">Сбросить</button>
+    
+    <div class="status" id="statusArea">Статус: Отключено</div>
+  </div>
+  <script src="popup.js"></script>
+</body>
+</html>
